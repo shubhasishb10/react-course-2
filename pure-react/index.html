@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello React</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Delius&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        font-family: "Delius";
+        margin: 10px auto;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script>
+      function App() {
+        //const time = new Date().toLocaleTimeString();
+        const [time, setTime] = React.useState(new Date().toLocaleTimeString());
+        const [bgColor, setBgColor] = React.useState("lightblue");
+        const [borderColor, setBorderColor] = React.useState("blue");
+        React.useEffect(function () {
+          setInterval(function () {
+            function getRandomColor() {
+              var letters = "BCDEF".split("");
+              var color = "#";
+              for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * letters.length)];
+              }
+              return color;
+            }
+            function getRandomBorderColor() {
+              var letters = "150AE".split("");
+              var color = "#";
+              for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * letters.length)];
+              }
+              return color;
+            }
+            setTime(new Date().toLocaleTimeString());
+            setBgColor(getRandomColor());
+            setBorderColor(getRandomBorderColor());
+          }, 1000);
+        }, []);
+
+        return React.createElement(
+          "header",
+          {
+            style: {
+              color: `${borderColor}`,
+            //   padding: "5rem",
+            //   margin: "2rem",
+            //   outline: `4px solid ${borderColor}`,
+            },
+          },
+          null,
+          `Hello React!. It's ${time}`
+        );
+      }
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(React.createElement(App));
+    </script>
+  </body>
+</html>
