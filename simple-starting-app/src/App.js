@@ -1,34 +1,22 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import moment from "moment";
+import Advice from "./Advice";
+import Time from "./Time";
 
 function App() {
-  const [advice, setAdvice] = useState("");
-  const [count, setCount] = useState(0);
-
-  async function getAdvice() {
-    const res = await fetch("https://api.adviceslip.com/advice");
-    const data = await res.json();
-    setAdvice(data.slip.advice);
-    setCount((c) => c + 1);
-  }
-
-  useEffect(function () {
-    getAdvice();
-  }, []);
-
   return (
-    <div className="App">
-      <h1>{advice}</h1>
-      <button className="get-advice-button" onClick={getAdvice}>
-        Get Advice
-      </button>
-      <Message count={count} />
-    </div>
+    <>
+      <div style={{ textAlign: "center" }}>
+        <Time />
+      </div>
+      <Advice />
+    </>
   );
 }
 
 export default App;
 
-function Message(props) {
-  return <p>You have read {props.count} advices</p>;
-}
+// function Message(props) {
+//   return <p>You have read {props.count} advices</p>;
+// }
